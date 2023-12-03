@@ -2,7 +2,7 @@
 
 ## 概要
 
-[asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) の補完で正しいスペル候補をだす
+[asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) の補完で正しいスペル補完候補をだす
 
 ## 要件
 
@@ -40,16 +40,17 @@ call dein#add('iranoan/asyncomplete-spell')
 ### Vim packadd
 
 ``` sh
-$ git clone https://github.com/iranoan/asyncomplete-spell ~/.vim/pack/iranoan/start/asyncomplete-spell
+git clone https://github.com/iranoan/asyncomplete-spell ~/.vim/pack/iranoan/start/asyncomplete-spell
 ```
 
 遅延読み込みをさせるなら
 
 ``` sh
-$ git clone https://github.com/iranoan/asyncomplete-spell ~/.vim/pack/iranoan/opt/asyncomplete-spell
+git clone https://github.com/iranoan/asyncomplete-spell ~/.vim/pack/iranoan/opt/asyncomplete-spell
 ```
 
 ## 設定方法
+
 \~/.vim/vimrc などの設定ファイルに次のような記載を加える
 
 ``` vim
@@ -60,6 +61,7 @@ call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options(
 ```
 
 英語を想定しているので、それ以外の言語で使う場合は綴りに使う文字設定必要で、デフォルト相当は
+
 ``` vim
 call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options({
   \ 'refresh_pattern': '\m\c\([A-Z]\{2,}\|[A-Z]\+''[A-Z]\+\)$',
@@ -71,14 +73,24 @@ call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options(
 
 ![使用例](asyncomplete-spell.gif)
 
-設定が終われば、[asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) の候補に正しいスペルとメニュー項目として
+設定が終われば、[asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) の補完候補に正しいスペルとメニュー項目として
 
-* タイプされている単語が正しければ [spell:good] 
-* そうでなければ [spell:--] と -- 部に [spellbadword()](https://vim-jp.org/vimdoc-ja/builtin.html#spellbadword%28%29) によるスペルミスの種類を表示する
+* タイプされている単語が正しければ [spell:good]
+* そうでなければ [spell:--] と -- 部に
+[spellbadword()](https://vim-jp.org/vimdoc-ja/builtin.html#spellbadword%28%29)
+によるスペルミスの種類を表示する
 
-CamelCase の綴りは全体でスペル・チェックしてミスが有る場合は、末尾部分で大文字で区切った最長一致でチェックしている 
-例えば LuaLaTeX では、次の順でチェックしていく
+また
 
-* LuaLaTeX
-* LaTeX
-* TeX
+* 単語ごとに2文字以上で補完候補に加える
+* [asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) 
+は前方一致で補完候補を絞り込むので、追加・表示される補完候補は 
+[z=](https://vim-jp.org/vimdoc-ja/spell.html#z=), 
+[i\_CTRL-X\_CTRL-S](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_CTRL-S) 
+([i\_CTRL-X\_s](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_s)) 
+より少なくなる
+* CamelCase の綴りは全体でスペル・チェックしてミスが有る場合は、末尾部分で大文字で区切った最長一致でチェックしている  
+  例えば LuaLaTeX では、次の順でチェックしていく
+  * LuaLaTeX
+  * LaTeX
+  * TeX

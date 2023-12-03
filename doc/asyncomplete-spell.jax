@@ -19,7 +19,7 @@ License: GPL Ver.3.
                                                *asyncomplete-spell-introduction*
 概要~
 
-asyncomplate.vim の補完で正しいスペル候補をだす
+asyncomplate.vim の補完で正しいスペル補完候補に加える
 
 ==============================================================================
                                                     *asyncomplete-spell-require*
@@ -82,16 +82,20 @@ Vim packadd~
                                                        *asyncomplete-spell-use*
 使用方法~
 
-設定が終われば、asyncomplete.vim の候補に正しいスペルとメニュー項目として
+設定が終われば、asyncomplete.vim の補完候補に正しいスペルとメニュー項目として
 	* タイプされている単語が正しければ [spell:good]
 	* そうでなければ [spell:--] と -- 部に |spellbadword()| によるスペルミスの種類
 		を表示する
 
-CamelCase の綴りは全体でスペル・チェックしてミスが有る場合は、末尾部分で大
-文字で区切った最長一致でチェックしている
-例えば LuaLaTeX では、次の順でチェックしていく
-	* LuaLaTeX
-	* LaTeX
-	* TeX
+また
+* 単語ごとに2文字以上で補完候補に加える
+* asyncomplate.vim は前方一致で補完候補を絞り込むので、追加・表示される補完候補は
+	|z=|, |i_CTRL-X_CTRL-S| (|i_CTRL-X_s|) より少なくなる
+* CamelCase の綴りは全体でスペル・チェックしてミスが有る場合は、末尾部分で大
+	文字で区切った最長一致でチェックしている
+	例えば LuaLaTeX では、次の順でチェックしていく
+	- LuaLaTeX
+	- LaTeX
+	- TeX
 
 vim:tw=78:ts=2:ft=help:norl:noet:fen:
