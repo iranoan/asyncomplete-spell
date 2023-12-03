@@ -83,11 +83,11 @@ call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options(
 また
 
 * 単語ごとに2文字以上で補完候補に加える
-* [asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) 
-は前方一致で補完候補を絞り込むので、追加・表示される補完候補は 
-[z=](https://vim-jp.org/vimdoc-ja/spell.html#z=), 
-[i\_CTRL-X\_CTRL-S](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_CTRL-S) 
-([i\_CTRL-X\_s](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_s)) 
+* [asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim)
+は前方一致で補完候補を絞り込むので、追加・表示される補完候補は
+[z=](https://vim-jp.org/vimdoc-ja/spell.html#z=),
+[i\_CTRL-X\_CTRL-S](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_CTRL-S)
+([i\_CTRL-X\_s](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_s))
 より少なくなる
 * CamelCase の綴りは全体でスペル・チェックしてミスが有る場合は、末尾部分で大文字で区切った最長一致でチェックしている  
   例えば LuaLaTeX では、次の順でチェックしていく
