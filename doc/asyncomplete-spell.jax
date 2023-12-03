@@ -1,0 +1,97 @@
+*asyncomplete-spell* spell check for asyncomplete.vim
+
+Author:  Iranoan <iranoan+vim@gspell.com>
+Repository: https://github.com/iranoan/asyncomplete-spell
+License: GPL Ver.3.
+
+
+==============================================================================
+                                                   *asyncomplete-spell-contents*
+目次~
+
+	* 概要                                        |asyncomplete-spell-introduction|
+	* 要件                                        |asyncomplete-spell-require|
+	* インストール                                |asyncomplete-spell-install|
+	* 設定                                        |asyncomplete-spell-conf|
+
+
+==============================================================================
+                                               *asyncomplete-spell-introduction*
+概要~
+
+asyncomplate.vim の補完で正しいスペル候補をだす
+
+==============================================================================
+                                                    *asyncomplete-spell-require*
+要件~
+
+* Vim 8.0 以上
+* asyncomplete.vim
+	https://github.com/prabirshrestha/asyncomplete.vim
+
+==============================================================================
+                                                    *asyncomplete-spell-install*
+インストール~
+
+使用しているパッケージ・マネージャに従えば良い
+
+Vundle (https://github.com/gmarik/vundle)~
+>
+	Plug 'iranoan/asyncomplete-spell'
+
+Vim-Plug (https://github.com/junegunn/vim-plug)~
+>
+	Plug 'iranoan/asyncomplete-spell'
+
+NeoBundle (https://github.com/Shougo/neobundle.vim)~
+>
+	NeoBundle 'iranoan/asyncomplete-spell'
+
+dein.nvim (https://github.com/Shougo/dein.vim)~
+>
+	call dein#add('iranoan/asyncomplete-spell')
+
+Vim packadd~
+>
+	$ git clone https://github.com/iranoan/asyncomplete-spell ~/.vim/pack/iranoan/start/asyncomplete-spell
+
+<遅延読み込みをさせるなら >
+	$ git clone https://github.com/iranoan/asyncomplete-spell ~/.vim/pack/iranoan/opt/asyncomplete-spell
+<として asyncomplete.vim の設定箇所に >
+	packadd asyncomplete-spell
+<を書き加える
+
+
+==============================================================================
+                                                       *asyncomplete-spell-conf*
+設定~
+~/.vim/vimrc などの設定ファイル中の asyncomplete.vim 設定箇所に次のような記載を
+加える >
+	call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options({
+		\ 'priority': 5,
+		\ }))
+
+英語を想定しているので、それ以外の言語で使う場合は綴りに使う文字設定必要で、デ
+フォルト相当は >
+	call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options({
+		\ 'refresh_pattern': '\m\c\([A-Z]\{2,}\|[A-Z]\+''[A-Z]\+\)$',
+		\ 'allowlist': ['*'],
+		\ }))
+
+==============================================================================
+                                                       *asyncomplete-spell-use*
+使用方法~
+
+設定が終われば、asyncomplete.vim の候補に正しいスペルとメニュー項目として
+	* タイプされている単語が正しければ [spell:good]
+	* そうでなければ [spell:--] と -- 部に |spellbadword()| によるスペルミスの種類
+		を表示する
+
+CamelCase の綴りは全体でスペル・チェックしてミスが有る場合は、末尾部分で大
+文字で区切った最長一致でチェックしている
+例えば LuaLaTeX では、次の順でチェックしていく
+	* LuaLaTeX
+	* LaTeX
+	* TeX
+
+vim:tw=78:ts=2:ft=help:norl:noet:fen:
