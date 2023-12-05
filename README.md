@@ -83,14 +83,40 @@ call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options(
 また
 
 * 単語ごとに2文字以上で補完候補に加える
-* [asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim)
-は前方一致で補完候補を絞り込むので、追加・表示される補完候補は
-[z=](https://vim-jp.org/vimdoc-ja/spell.html#z=),
-[i\_CTRL-X\_CTRL-S](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_CTRL-S)
-([i\_CTRL-X\_s](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_s))
+* [asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) 
+は標準設定では前方一致で補完候補を絞り込むので、追加・表示される補完候補は 
+[z=](https://vim-jp.org/vimdoc-ja/spell.html#z=), 
+[i\_CTRL-X\_CTRL-S](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_CTRL-S) 
+([i\_CTRL-X\_s](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-X_s)) 
 より少なくなる
 * CamelCase の綴りは全体でスペル・チェックしてミスが有る場合は、末尾部分で大文字で区切った最長一致でチェックしている  
   例えば LuaLaTeX では、次の順でチェックしていく
   * LuaLaTeX
   * LaTeX
   * TeX
+
+### z=, i\_CTRL-X\_CTRL-S (i\_CTRL-X\_s) 相当を表示させる方法
+
+g:asyncomplete\_preprocessor を設定すれば良い
+
+例えば重複を除きつつ、asyncomplete-spell 以外は大文字・小文字を区別しない前方一致で絞り込ませるのは次の設定
+
+```vim
+let g:asyncomplete_preprocessor = [function('s:asyncomplete_preprocessor')]
+
+function s:asyncomplete_preprocessor(options, matches) abort
+  let l:visited = {}
+  let l:items = []
+  let l:base = '^\m' .. escape(a:options['base'], '\.$*~')
+  for [l:source_name, l:matches] in items(a:matches)
+    for l:item in l:matches['items']
+      if !has_key(l:visited, l:item['word'])
+            \ && ( l:source_name ==# 'spell' || l:item['word'] =~? l:base )
+        call add(l:items, l:item)
+        let l:visited[l:item['word']] = 1
+      endif
+    endfor
+  endfor
+  call asyncomplete#preprocess_complete(a:options, l:items)
+endfunction
+```
