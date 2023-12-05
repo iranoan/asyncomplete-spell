@@ -26,7 +26,7 @@ function asyncomplete#sources#spell#completor(opt, ctx) abort
 	let l:kw = matchstr(l:typed, pat)
 	let l:miss = spellbadword(l:kw)[1]
 	if l:miss !=# '' && match(l:kw, '\m\c^[A-Z]\+$') == 0 && match(l:kw, '\m\C[A-Z]') != -1 " programming CamelCase
-		let i = 2
+		let i = 1 " if first letter of word is lowercase, it must be check from 1st letter.
 		while l:miss !=# '' && match(l:kw, '\m\C[A-Z]') != -1
 			let l:kw = matchstr(l:typed, '\m\C[A-Z][A-Za-z]\+$', i)
 			if l:kw ==# ''
