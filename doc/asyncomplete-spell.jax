@@ -82,10 +82,10 @@ Vim packadd~
                                                        *asyncomplete-spell-use*
 使用方法~
 
-設定が終われば、asyncomplete.vim の補完候補に正しいスペルとメニュー項目として
-	* タイプされている単語が正しければ [spell:good]
-	* そうでなければ [spell:--] と -- 部に |spellbadword()| によるスペルミスの種類
-		を表示する
+設定が終われば、asyncomplete.vim の補完候補に
+	* 正しいスペルと [spell:--] を表示する
+		* -- 部には spellbadword() によるスペルミスの種類を表示する
+	* スペルミスがなければ、補完候補に何も加えない
 
 また
 * 単語ごとに2文字以上で補完候補に加える

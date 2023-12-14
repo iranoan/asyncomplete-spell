@@ -73,12 +73,13 @@ call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options(
 
 ![使用例](asyncomplete-spell.gif)
 
-設定が終われば、[asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) の補完候補に正しいスペルとメニュー項目として
+設定が終われば、[asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) の補完候補に
 
-* タイプされている単語が正しければ [spell:good]
-* そうでなければ [spell:--] と -- 部に
-[spellbadword()](https://vim-jp.org/vimdoc-ja/builtin.html#spellbadword%28%29)
-によるスペルミスの種類を表示する
+* 正しいスペルと [spell:--] を表示する
+  * -- 部には
+  [spellbadword()](https://vim-jp.org/vimdoc-ja/builtin.html#spellbadword%28%29)
+  によるスペルミスの種類を表示する  
+* スペルミスがなければ、補完候補に何も加えない
 
 また
 

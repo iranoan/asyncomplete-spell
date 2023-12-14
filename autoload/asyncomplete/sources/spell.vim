@@ -39,7 +39,7 @@ function asyncomplete#sources#spell#completor(opt, ctx) abort
 		endwhile
 	endif
 	if l:miss ==# ''
-		let l:matches = [#{word: l:kw, menu: "[spell:good]"}]
+		let l:matches = []
 	else
 		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, menu: "[spell:' .. l:miss .. ']"}')
 	endif
