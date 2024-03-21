@@ -75,7 +75,7 @@ call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options(
 
 設定が終われば、[asyncomplete.vim](https://github.com/prabirshrestha/asyncomplete.vim) の補完候補に
 
-* 正しいスペルと [spell:--] を表示する
+* 正しいスペルと [--] を表示する
   * -- 部には
   [spellbadword()](https://vim-jp.org/vimdoc-ja/builtin.html#spellbadword%28%29)
   によるスペルミスの種類を表示する  

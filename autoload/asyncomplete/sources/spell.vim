@@ -12,7 +12,7 @@ set cpoptions&vim
 
 function asyncomplete#sources#spell#get_source_options(opts)
 	return extend(extend({}, a:opts), {
-				\ 'name': 'spell',
+				\ 'name': 'Spell',
 				\ 'completor': function('asyncomplete#sources#spell#completor'),
 				\ 'refresh_pattern': '\m\c\([A-Z]\{2,}\|[A-Z]\+''[A-Z]\+\)$',
 				\ 'allowlist': ['*'],
@@ -41,7 +41,7 @@ function asyncomplete#sources#spell#completor(opt, ctx) abort
 	if l:miss ==# ''
 		let l:matches = []
 	else
-		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, menu: "[spell:' .. l:miss .. ']"}')
+		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, kind: "' .. asyncomplete#sources#spell#get_source_options({}).name .. '",menu: "[' .. l:miss .. ']"}')
 	endif
 	let l:startcol = a:ctx['col'] - len(l:kw)
 	call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches, 1)
