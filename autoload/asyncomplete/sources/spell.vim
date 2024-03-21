@@ -12,7 +12,7 @@ set cpoptions&vim
 
 function asyncomplete#sources#spell#get_source_options(opts)
 	return extend(extend({}, a:opts), {
-				\ 'name': 'Spell',
+				\ 'name': 'spell',
 				\ 'completor': function('asyncomplete#sources#spell#completor'),
 				\ 'refresh_pattern': '\m\c\([A-Z]\{2,}\|[A-Z]\+''[A-Z]\+\)$',
 				\ 'allowlist': ['*'],
