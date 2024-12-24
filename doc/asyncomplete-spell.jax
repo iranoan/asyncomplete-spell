@@ -36,19 +36,19 @@ asyncomplate.vim の補完で正しいスペル補完候補に加える
 使用しているパッケージ・マネージャに従えば良い
 
 Vundle (https://github.com/gmarik/vundle)~
->
+>vim
 	Plug 'iranoan/asyncomplete-spell'
 
 Vim-Plug (https://github.com/junegunn/vim-plug)~
->
+>vim
 	Plug 'iranoan/asyncomplete-spell'
 
 NeoBundle (https://github.com/Shougo/neobundle.vim)~
->
+>vim
 	NeoBundle 'iranoan/asyncomplete-spell'
 
 dein.nvim (https://github.com/Shougo/dein.vim)~
->
+>vim
 	call dein#add('iranoan/asyncomplete-spell')
 
 Vim packadd~
@@ -57,7 +57,7 @@ Vim packadd~
 
 <遅延読み込みをさせるなら >
 	$ git clone https://github.com/iranoan/asyncomplete-spell ~/.vim/pack/iranoan/opt/asyncomplete-spell
-<として asyncomplete.vim の設定箇所に >
+<として asyncomplete.vim の設定箇所に >vim
 	packadd asyncomplete-spell
 <を書き加える
 
@@ -66,13 +66,13 @@ Vim packadd~
                                                        *asyncomplete-spell-conf*
 設定~
 ~/.vim/vimrc などの設定ファイル中の asyncomplete.vim 設定箇所に次のような記載を
-加える >
+加える >vim
 	call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options({
 		\ 'priority': 5,
 		\ }))
 
 英語を想定しているので、それ以外の言語で使う場合は綴りに使う文字設定必要で、デ
-フォルト相当は >
+フォルト相当は >vim
 	call asyncomplete#register_source(asyncomplete#sources#spell#get_source_options({
 		\ 'refresh_pattern': '\m\c\([A-Z]\{2,}\|[A-Z]\+''[A-Z]\+\)$',
 		\ 'allowlist': ['*'],
@@ -104,7 +104,7 @@ z=, i_CTRL-X_CTRL-S (i_CTRL-X_s) 相当を表示させる方法~
 
 例えば重複を除きつつ、asyncomplete-spell 以外は大文字・小文字を区別しない前方一
 致で絞り込ませるのは次の設定
->
+>vim
 	let g:asyncomplete_preprocessor = [function('s:asyncomplete_preprocessor')]
 
 	function s:asyncomplete_preprocessor(options, matches) abort
