@@ -88,7 +88,6 @@ Vim packadd~
 * 正しいスペルの場合は、似た単語と [good] を表示する
 
 また
-* 単語ごとに2文字以上の入力で補完候補をリスト・アップされる
 * asyncomplate.vim は補完候補の絞り込みは |g:asyncomplete_matchfuzzy| に依存する
 	ので、補完候補は |z=|, |i_CTRL-X_CTRL-S| (|i_CTRL-X_s|) より少なくなる場合が有る
 * CamelCase の綴りは全体でスペル・チェックしてミスが有る場合は、末尾部分で大

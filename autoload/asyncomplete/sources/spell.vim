@@ -14,7 +14,7 @@ function asyncomplete#sources#spell#get_source_options(opts)
 	return extend(extend({}, a:opts), {
 				\ 'name': 'spell',
 				\ 'completor': function('asyncomplete#sources#spell#completor'),
-				\ 'refresh_pattern': '\m\c\([A-Z]\{2,}\|[A-Z]\+''[A-Z]\+\)$',
+				\ 'refresh_pattern': '\m\c\([A-Z]\+\|[A-Z]\+''[A-Z]\+\)$',
 				\ 'allowlist': ['*'],
 				\ })
 endfunction
@@ -39,9 +39,9 @@ function asyncomplete#sources#spell#completor(opt, ctx) abort
 		endwhile
 	endif
 	if l:miss ==# ''
-		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, kind: "spell",menu: "[good]"}')
+		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, kind: "' .. asyncomplete#sources#spell#get_source_options({}).name .. '",menu: "[good]"}')
 	else
-		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, kind: "spell",menu: "[' .. l:miss .. ']"}')
+		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, kind: "' .. asyncomplete#sources#spell#get_source_options({}).name .. '",menu: "[' .. l:miss .. ']"}')
 	endif
 	let l:startcol = a:ctx['col'] - len(l:kw)
 	call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches, 1)
