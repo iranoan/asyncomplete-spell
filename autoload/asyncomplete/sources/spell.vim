@@ -39,9 +39,9 @@ function asyncomplete#sources#spell#completor(opt, ctx) abort
 		endwhile
 	endif
 	if l:miss ==# ''
-		let l:matches = []
+		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, kind: "spell",menu: "[good]"}')
 	else
-		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, kind: "' .. asyncomplete#sources#spell#get_source_options({}).name .. '",menu: "[' .. l:miss .. ']"}')
+		let l:matches = map(spellsuggest(l:kw),'#{word:v:val, kind: "spell",menu: "[' .. l:miss .. ']"}')
 	endif
 	let l:startcol = a:ctx['col'] - len(l:kw)
 	call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches, 1)
